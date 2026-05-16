@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur d'installation Borne de Recharge | Volte</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between">
+
+    <header class="bg-white border-b border-slate-100 py-5 shadow-sm">
+        <div class="max-w-3xl mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index_volte.html'">
+                <svg class="w-6 h-8 text-slate-900" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="2" width="32" height="40" rx="6" fill="currentColor"/>
+                    <circle cx="20" cy="18" r="8" stroke="#10B981" stroke-width="2.5"/>
+                    <path d="M20 14L17 19H23L20 24" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="text-xl font-black tracking-tighter uppercase">Volte<span class="text-emerald-500">.</span></span>
+            </div>
+            <a href="index_volte.html" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
+                <i class="fa-solid fa-xmark mr-1"></i> Quitter
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center py-12 px-4">
+        <div class="max-w-xl w-full mx-auto bg-white rounded-3xl border border-slate-100 p-8 md:p-10 shadow-xl shadow-slate-200/50">
+            
+            <div class="mb-10">
+                <div class="flex justify-between items-center text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">
+                    <span id="step-indicator">Étape 1 sur 4</span>
+                    <span id="progress-percentage" class="text-emerald-500">25%</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="bg-emerald-500 h-full w-1/4 transition-all duration-300 ease-out"></div>
+                </div>
+            </div>
+
+            <form id="tunnel-form" onsubmit="handleSubmit(event)">
+                
+                <div id="step-1" class="form-step">
+                    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-3">Quel est votre type de logement ?</h2>
+                    <p class="text-slate-500 mb-8">Les aides de l'État et les contraintes techniques dépendent de votre habitation.</p>
+                    
+                    <div class="grid gap-4">
+                        <label class="flex items-center gap-4 p-5 rounded-2xl border-2 border-slate-200 hover:border-emerald-500 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50/40 cursor-pointer transition-all bg-white group">
+                            <input type="radio" name="logement" value="maison" class="accent-emerald-500 w-5 h-5" required>
+                            <div>
+                                <span class="block font-bold text-lg text-slate-900">Maison individuelle</span>
+                                <span class="block text-sm text-slate-400">Installation directe en intérieur ou extérieur.</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center gap-4 p-5 rounded-2xl border-2 border-slate-200 hover:border-emerald-500 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50/40 cursor-pointer transition-all bg-white group">
+                            <input type="radio" name="logement" value="copropriete" class="accent-emerald-500 w-5 h-5">
+                            <div>
+                                <span class="block font-bold text-lg text-slate-900">Appartement / Copropriété</span>
+                                <span class="block text-sm text-slate-400">Éligible aux subventions du programme ADVENIR.</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center gap-4 p-5 rounded-2xl border-2 border-slate-200 hover:border-emerald-500 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50/40 cursor-pointer transition-all bg-white group">
+                            <input type="radio" name="logement" value="entreprise" class="accent-emerald-500 w-5 h-5">
+                            <div>
+                                <span class="block font-bold text-lg text-slate-900">Entreprise / Parking privé</span>
+                                <span class="block text-sm text-slate-400">Pour équiper une flotte ou un lieu de travail.</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="step-2" class="form-step hidden">
+                    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-3">Détails techniques de l'installation</h2>
+                    <p class="text-slate-500 mb-8">Ces critères permettent à l'artisan d'estimer précisément le montant de vos travaux.</p>
+                    
+                    <div class="mb-6">
+                        <label class="block font-bold text-slate-900 mb-3">Distance estimée entre votre tableau électrique et la borne :</label>
+                        <div class="grid gap-3">
+                            <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:border-emerald-500 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50/30 cursor-pointer transition-all">
+                                <input type="radio" name="distance" value="court" class="accent-emerald-500 w-4 h-4" required>
+                                <span class="text-sm font-medium text-slate-800">Moins de 5 mètres (Proche du tableau)</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:border-emerald-500 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50/30 cursor-pointer transition-all">
+                                <input type="radio" name="distance" value="moyen" class="accent-emerald-500 w-4 h-4">
+                                <span class="text-sm font-medium text-slate-800">Entre 5 et 15 mètres</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:border-emerald-500 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50/30 cursor-pointer transition-all">
+                                <input type="radio" name="distance" value="long" class="accent-emerald-500 w-4 h-4">
+                                <span class="text-sm font-medium text-slate-800">Plus de 15 mètres (Raccordement plus important)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-slate-900 mb-3">Type de pose souhaité :</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:border-emerald-500 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50/30 cursor-pointer transition-all">
+                                <input type="radio" name="pose" value="mur" class="accent-emerald-500 w-4 h-4" required>
+                                <span class="text-sm font-medium text-slate-800">Fixation murale</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 hover:border-emerald-500 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50/30 cursor-pointer transition-all">
+                                <input type="radio" name="pose" value="pied" class="accent-emerald-500 w-4 h-4">
+                                <span class="text-sm font-medium text-slate-800">Sur pied / Colonne</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="step-3" class="form-step hidden">
+                    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-3">Quand souhaitez-vous installer votre borne ?</h2>
+                    <p class="text-slate-500 mb-8">Permet de filtrer la disponibilité des installateurs certifiés IRVE proches de chez vous.</p>
+                    
+                    <div class="grid gap-4 mb-6">
+                        <label class="flex items-center gap-4 p-4 rounded-xl border border-slate-200 hover:border-emerald-500 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50/30 cursor-pointer transition-all">
+                            <input type="radio" name="delai" value="immediat" class="accent-emerald-500 w-4 h-4" required>
+                            <span class="font-medium text-slate-800">Le plus tôt possible (Véhicule livré ou imminent)</span>
+                        </label>
+                        <label class="flex items-center gap-4 p-4 rounded-xl border border-slate-200 hover:border-emerald-500 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50/30 cursor-pointer transition-all">
+                            <input type="radio" name="delai" value="mois" class="accent-emerald-500 w-4 h-4">
+                            <span class="font-medium text-slate-800">D'ici 1 à 3 mois</span>
+                        </label>
+                        <label class="flex items-center gap-4 p-4 rounded-xl border border-slate-200 hover:border-emerald-500 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50/30 cursor-pointer transition-all">
+                            <input type="radio" name="delai" value="curiosite" class="accent-emerald-500 w-4 h-4">
+                            <span class="font-medium text-slate-800">Simple estimation / Projet lointain</span>
+                        </label>
+                    </div>
+
+                    <div class="relative mb-2">
+                        <label class="block font-bold text-slate-900 mb-2">Marque & Modèle du véhicule (Optionnel)</label>
+                        <div class="relative">
+                            <input type="text" id="vehicule-input" name="vehicule" autocomplete="off" placeholder="Ex: Tesla, Renault, Peugeot..." class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-500 transition-colors pr-10">
+                            <div class="absolute right-3 top-4 text-slate-400">
+                                <i class="fa-solid fa-car"></i>
+                            </div>
+                        </div>
+                        <ul id="autocomplete-list" class="absolute left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl max-h-60 overflow-y-auto hidden z-50 divide-y divide-slate-50">
+                            </ul>
+                    </div>
+                </div>
+
+                <div id="step-4" class="form-step hidden">
+                    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-3">Où devons-nous envoyer vos devis ?</h2>
+                    <p class="text-slate-500 mb-8">Dernière étape. Recevez gratuitement jusqu'à 3 propositions de prix sans engagement.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Prénom</label>
+                                <input type="text" name="prenom" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Nom</label>
+                                <input type="text" name="nom" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-500">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Adresse Email</label>
+                            <input type="email" name="email" required placeholder="nom@exemple.com" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-500">
+                        </div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="col-span-2">
+                                <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Téléphone</label>
+                                <input type="tel" name="telephone" required placeholder="06 12 34 56 78" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-500">
+                            </div>
+                            <div class="col-span-1">
+                                <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Code Postal</label>
+                                <input type="text" name="codepostal" required inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="75000" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-500">
+                            </div>
+                        </div>
+                        <div class="pt-2 text-[11px] text-slate-400 leading-relaxed">
+                            <i class="fa-solid fa-shield-halved text-emerald-500 mr-1"></i> Vos données sont protégées (RGPD). Elles seront transmises uniquement aux artisans certifiés IRVE partenaires RGE proches de chez vous.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center mt-10 pt-6 border-t border-slate-100">
+                    <button type="button" id="prev-btn" onclick="nextStep(-1)" class="invisible text-slate-500 font-bold hover:text-slate-900 transition-colors py-2">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Retour
+                    </button>
+                    
+                    <button type="button" id="next-btn" onclick="nextStep(1)" class="bg-emerald-500 text-white px-8 py-3.5 rounded-xl font-bold hover:bg-emerald-600 transition-colors shadow-lg shadow-emerald-500/20">
+                        Continuer <i class="fa-solid fa-arrow-right ml-1 text-sm"></i>
+                    </button>
+                    
+                    <button type="submit" id="submit-btn" class="hidden bg-slate-900 text-white px-8 py-3.5 rounded-xl font-bold hover:bg-emerald-600 transition-colors shadow-lg">
+                        Obtenir mes devis gratuits <i class="fa-solid fa-paper-plane ml-1 text-sm"></i>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <footer class="py-6 text-center text-xs text-slate-400 border-t border-slate-100 bg-white">
+        &copy; 2026 Volte &bull; Simulateur de transition énergétique conforme aux normes Qualifelec / IRVE et RGPD.
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4; // Intègre l'étape de configuration technique intermédiaire
+
+        // 1. BASE DE DONNÉES EXHAUSTIVE DES VÉHICULES ÉLECTRIQUES (Marché Français)
+        const electricVehicles = [
+            // RENAULT
+            "Renault 5 E-Tech", "Renault Megane E-Tech", "Renault Scenic E-Tech", "Renault Twingo E-Tech", "Renault Zoe", "Renault Kangoo E-Tech",
+            // TESLA
+            "Tesla Model Y", "Tesla Model 3", "Tesla Model S", "Tesla Model X", "Tesla Cybertruck",
+            // PEUGEOT
+            "Peugeot e-208", "Peugeot e-2008", "Peugeot e-308", "Peugeot e-308 SW", "Peugeot e-3008", "Peugeot e-5008",
+            // CITROËN
+            "Citroën ë-C3", "Citroën ë-C4", "Citroën ë-C4 X", "Citroën ë-Berlingo",
+            // DACIA
+            "Dacia Spring",
+            // FIAT
+            "Fiat 500e", "Fiat 600e", "Fiat Topolino",
+            // MG MOTOR
+            "MG4 EV", "MG5 EV", "MG ZS EV", "MG Marvel R", "MG Cyberster",
+            // BYD
+            "BYD Dolphin", "BYD Atto 3", "BYD Seal", "BYD Seal U", "BYD Han", "BYD Tang",
+            // VOLKSWAGEN
+            "Volkswagen ID.3", "Volkswagen ID.4", "Volkswagen ID.5", "Volkswagen ID.7", "Volkswagen ID.7 Tourer", "Volkswagen ID. Buzz",
+            // BMW
+            "BMW iX1", "BMW iX2", "BMW iX3", "BMW i4", "BMW i5", "BMW i7", "BMW iX",
+            // AUDI
+            "Audi Q4 e-tron", "Audi Q4 Sportback e-tron", "Audi Q6 e-tron", "Audi Q8 e-tron", "Audi SQ8 e-tron", "Audi e-tron GT",
+            // HYUNDAI
+            "Hyundai Kona Electric", "Hyundai Ioniq 5", "Hyundai Ioniq 5 N", "Hyundai Ioniq 6", "Hyundai Inster",
+            // KIA
+            "Kia Niro EV", "Kia EV3", "Kia EV6", "Kia EV9", "Kia e-Soul",
+            // VOLVO
+            "Volvo EX30", "Volvo EX40", "Volvo EC40", "Volvo EX90",
+            // MERCEDES-BENZ
+            "Mercedes EQA", "Mercedes EQB", "Mercedes EQC", "Mercedes EQE", "Mercedes EQE SUV", "Mercedes EQS", "Mercedes EQS SUV",
+            // CUPRA
+            "Cupra Born", "Cupra Tavascan",
+            // SKODA
+            "Skoda Enyaq iV", "Skoda Enyaq Coupé iV", "Skoda Elroq",
+            // FORD
+            "Ford Mustang Mach-E", "Ford Explorer Electric", "Ford Capri",
+            // NISSAN
+            "Nissan Leaf", "Nissan Ariya", "Nissan Townstar EV",
+            // TOYOTA & LEXUS
+            "Toyota bZ4X", "Lexus RZ 450e", "Lexus UX 300e",
+            // MINI
+            "Mini Cooper Electric", "Mini Aceman", "Mini Countryman Electric",
+            // SMART
+            "Smart #1", "Smart #3",
+            // OPEL
+            "Opel Corsa Electric", "Opel Mokka Electric", "Opel Astra Electric", "Opel Frontera Electric",
+            // JEEP
+            "Jeep Avenger Electric"
+        ];
+
+        const vehiculeInput = document.getElementById('vehicule-input');
+        const autocompleteList = document.getElementById('autocomplete-list');
+
+        // 2. MOTEUR D'AUTO-COMPLÉTION ET FILTRE PAR PRÉFIXE RECHERCHÉ
+        vehiculeInput.addEventListener('input', function() {
+            const val = this.value.trim().toLowerCase(); // Nettoyage des espaces et de la casse
+            autocompleteList.innerHTML = '';
+            
+            // Si le champ de texte est vide ou contient moins de 1 caractère, on masque la liste
+            if (!val || val.length < 1) {
+                autocompleteList.classList.add('hidden');
+                return;
+            }
+
+            // Étape A : Filtrer les véhicules contenant les lettres recherchées n'importe où dans le nom
+            let matches = electricVehicles.filter(car => 
+                car.toLowerCase().includes(val)
+            );
+
+            // Étape B : TRi AVANCÉ PAR PRÉFIXE. Fait remonter en priorité les voitures commençant exactement par 'val' (ex: "Ren...")
+            matches.sort((a, b) => {
+                const aStarts = a.toLowerCase().startsWith(val);
+                const bStarts = b.toLowerCase().startsWith(val);
+                if (aStarts && !bStarts) return -1; // 'a' commence par le texte saisi, on le pousse en haut
+                if (!aStarts && bStarts) return 1;  // 'b' commence par le texte saisi, on le pousse en haut
+                return a.localeCompare(b); // Sinon, tri par ordre alphabétique de base
+            });
+
+            // Si aucun résultat ne correspond, on ferme la liste déroulante
+            if (matches.length === 0) {
+                autocompleteList.classList.add('hidden');
+                return;
+            }
+
+            // Étape C : Génération dynamique des choix de la liste déroulante
+            matches.forEach(match => {
+                const li = document.createElement('li');
+                li.className = 'px-4 py-3 hover:bg-emerald-50 cursor-pointer text-sm text-slate-700 font-medium transition-colors flex items-center gap-2';
+                
+                // Rendu visuel pro : Utilisation d'une Regex pour surligner en gras et en vert les lettres tapées par l'utilisateur
+                const regex = new RegExp(`(${val})`, "gi");
+                const highlightedName = match.replace(regex, "<strong class='text-emerald-600 font-bold'>$1</strong>");
+                
+                li.innerHTML = `<i class="fa-solid fa-car-side text-slate-300 text-xs"></i> ${highlightedName}`;
+                
+                // Clic sur l'une des suggestions auto-complétées
+                li.addEventListener('click', function() {
+                    vehiculeInput.value = match; // Assigne la valeur exacte à l'input
+                    autocompleteList.classList.add('hidden'); // Ferme la liste
+                });
+                autocompleteList.appendChild(li);
+            });
+
+            autocompleteList.classList.remove('hidden'); // Rendre la liste visible à l'écran
+        });
+
+        // Fermer la liste automatique si l'utilisateur clique en dehors de la zone de saisie
+        document.addEventListener('click', function(e) {
+            if (e.target !== vehiculeInput && e.target !== autocompleteList) {
+                autocompleteList.classList.add('hidden');
+            }
+        });
+
+        // 3. AFFICHAGE ET GESTION DES ÉTAPES DU FORMULAIRE (UI CONTROLLER)
+        function updateUI() {
+            // Affiche l'étape active et masque les autres
+            for (let i = 1; i <= totalSteps; i++) {
+                document.getElementById(`step-${i}`).classList.toggle('hidden', i !== currentStep);
+            }
+
+            // Calcule et ajuste la barre de progression
+            const percentage = Math.round((currentStep / totalSteps) * 100);
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('progress-percentage').innerText = `${percentage}%`;
+            document.getElementById('step-indicator').innerText = `Étape ${currentStep} sur ${totalSteps}`;
+
+            // Masque le bouton de retour à la première étape
+            document.getElementById('prev-btn').classList.toggle('invisible', currentStep === 1);
+
+            // Permutation entre le bouton 'Continuer' et le bouton final 'Soumettre' à la dernière étape
+            if (currentStep === totalSteps) {
+                document.getElementById('next-btn').classList.add('hidden');
+                document.getElementById('submit-btn').classList.remove('hidden');
+            } else {
+                document.getElementById('next-btn').classList.remove('hidden');
+                document.getElementById('submit-btn').classList.add('hidden');
+            }
+        }
+
+        // Changement d'étape (Suivant : +1 / Précédent : -1)
+        function nextStep(increment) {
+            // Validation HTML5 native des champs requis de l'étape courante avant d'autoriser à avancer
+            if (increment === 1) {
+                const currentInputs = document.getElementById(`step-${currentStep}`).querySelectorAll('[required]');
+                let allValid = true;
+                currentInputs.forEach(input => {
+                    if (!input.checkValidity()) {
+                        input.reportValidity(); // Déclenche l'affichage de l'infobulle d'erreur native du navigateur
+                        allValid = false;
+                    }
+                });
+                if (!allValid) return; // Bloque la transition si un champ obligatoire est manquant
+            }
+
+            currentStep += increment;
+            if (currentStep < 1) currentStep = 1;
+            if (currentStep > totalSteps) currentStep = totalSteps;
+            updateUI(); // Met à jour l'interface utilisateur
+        }
+
+        // 4. TRAITEMENT ET SOUMISSION DU FORMULAIRE COMPLÉTÉ
+        function handleSubmit(event) {
+            event.preventDefault(); // Empêche le rechargement immédiat de la page
+            const formData = new FormData(event.target);
+            
+            // Notification récapitulative des données prêtes à être envoyées à votre régie partenaire
+            alert(`Succès ! Lead Volte généré.\n\nNom : ${formData.get('prenom')} ${formData.get('nom')}\nLogement : ${formData.get('logement')}\nVéhicule : ${formData.get('vehicule') || 'Non spécifié'}\nDistance tableau-borne : ${formData.get('distance')}\nPose : ${formData.get('pose')}\nCode Postal : ${formData.get('codepostal')}`);
+            
+            // Redirection de l'utilisateur vers la page d'accueil après validation
+            window.location.href = 'index_volte.html';
+        }
+    </script>
+    <script>
+    /**
+     * Fonction principale de déclenchement du pixel de conversion
+     * @param {Object} leadData - Les données anonymisées du lead pour la plateforme
+     */
+    function trackAffiliationConversion(leadData) {
+        // 1. Récupération des paramètres d'affiliation dans l'URL (ex: ?clickid=12345&source=google)
+        const urlParams = new URLSearchParams(window.location.search);
+        const clickId = urlParams.get('clickid') || localStorage.getItem('volte_clickid') || 'ORGANIC';
+        const source = urlParams.get('utm_source') || localStorage.getItem('volte_source') || 'direct';
+
+        // 2. Préparation du payload de conversion conforme aux exigences des plateformes en 2026
+        const conversionPayload = {
+            event: 'lead_generation',
+            transaction_id: 'VOLTE-' + Math.floor(Math.random() * 1000000), // ID unique temporaire
+            click_id: clickId,
+            source: source,
+            lead_type: leadData.housingType || 'non_spécifié', // Maison ou Copropriété
+            power_requested: leadData.power || 'non_spécifiée', // 7.4kW, 11kW, etc.
+            department: leadData.zipCode ? leadData.zipCode.substring(0, 2) : '00', // Utile pour la valeur du lead
+            estimated_value: leadData.housingType === 'copropriete' ? 45.00 : 25.00, // Exemple de payout d'affiliation (Monétisation supérieure en copropriété)
+            currency: 'EUR',
+            timestamp: new Date().toISOString()
+        };
+
+        console.log('[Volte Tracking] Envoi de la conversion à la plateforme...', conversionPayload);
+
+        // 3. Envoi au DataLayer Google Tag Manager (Recommandé pour centraliser Awin/Effiliation/Meta Pixel)
+        if (window.dataLayer) {
+            window.dataLayer.push({
+                'event': 'affiliation_conversion',
+                'conversion_details': conversionPayload
+            });
+        }
+
+        // 4. Exemple d'appel API Direct / Webhook (Si vous vendez vos leads en direct à un réseau d'artisans)
+        /*
+        fetch('https://api.plateforme-affiliation.com/v1/conversion', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(conversionPayload)
+        })
+        .then(response => response.json())
+        .then(data => console.log('[Volte Tracking] Succès API:', data))
+        .catch(error => console.error('[Volte Tracking] Erreur API:', error));
+        */
+    }
+
+    /**
+     * SCRIPT DE CAPTURE DU CLICK_ID (À mettre sur toutes les pages)
+     * Permet de sauvegarder l'ID de l'affilié si l'utilisateur navigue sur le blog avant de convertir
+     */
+    (function saveAffiliationContext() {
+        const params = new URLSearchParams(window.location.search);
+        const affClickId = params.get('clickid') || params.get('gclid') || params.get('ttclid'); // Support plateformes + Google/TikTok Ads
+        const affSource = params.get('utm_source');
+
+        if (affClickId) {
+            localStorage.setItem('volte_clickid', affClickId);
+            // Optionnel : Expire après 30 jours
+            localStorage.setItem('volte_track_time', Date.now());
+        }
+        if (affSource) {
+            localStorage.setItem('volte_source', affSource);
+        }
+    })();
+</script>
+</body>
+</html>

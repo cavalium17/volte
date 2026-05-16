@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volte | Comparez les Installateurs de Bornes de Recharge IRVE</title>
+    <meta name="description" content="Économisez sur l'installation de votre borne de recharge à domicile en 2026. Simulez vos aides d'État et recevez 3 devis d'artisans certifiés IRVE.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-gradient { background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.02), 0 8px 10px -6px rgba(0, 0, 0, 0.02); }
+        .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -6px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between">
+
+    <nav class="bg-white border-b border-slate-100 sticky top-0 z-50 shadow-sm py-4">
+        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index_volte.html'">
+                <svg class="w-6 h-8 text-slate-900" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="2" width="32" height="40" rx="6" fill="currentColor"/>
+                    <circle cx="20" cy="18" r="8" stroke="#10B981" stroke-width="2.5"/>
+                    <path d="M20 14L17 19H23L20 24" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="text-xl font-black tracking-tighter uppercase">Volte<span class="text-emerald-500">.</span></span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+                <a href="#features" class="hover:text-slate-900 transition-colors">Pourquoi Volte</a>
+                <a href="guides_volte.html" class="text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-1">
+                    <i class="fa-solid fa-book-open text-xs"></i> Guides & Blog
+                </a>
+            </div>
+
+            <div>
+                <a href="devis_volte.html" class="bg-emerald-500 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-emerald-600 transition-colors shadow-md shadow-emerald-500/10 text-sm">
+                    Simuler mes aides <i class="fa-solid fa-calculator ml-1"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-gradient text-white py-20 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.08),transparent_45%)]"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="bg-emerald-500/10 text-emerald-400 text-xs font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 inline-block border border-emerald-500/20">
+                <i class="fa-solid fa-bolt mr-1"></i> Mise à jour Réglementaire 2026
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                Installez votre Borne de Recharge <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">au juste prix</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 font-normal leading-relaxed">
+                Ne payez pas votre Wallbox trop cher. Estimez vos subventions d’État en 2 minutes et comparez les offres de 3 installateurs qualifiés IRVE de votre région.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="devis_volte.html" class="w-full sm:w-auto bg-emerald-500 text-white font-bold px-8 py-4 rounded-xl hover:bg-emerald-600 transition-colors text-center text-lg shadow-xl shadow-emerald-500/20">
+                    Calculer mes aides en 2 min <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                </a>
+                <a href="guides_volte.html" class="w-full sm:w-auto bg-slate-800 text-slate-300 font-semibold px-6 py-4 rounded-xl hover:bg-slate-700 transition-colors text-center border border-slate-700 text-sm">
+                    Consulter les guides d'achat
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto mt-16 pt-10 border-t border-slate-800 text-left text-slate-400 text-xs font-medium">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-shield-check text-emerald-400 text-xl"></i>
+                    <span>Artisans 100% Qualifiés IRVE & RGE</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-gauge-high text-emerald-400 text-xl"></i>
+                    <span>Simulation gratuite & sans engagement</span>
+                </div>
+                <div class="hidden md:flex items-center gap-3">
+                    <i class="fa-solid fa-percent text-emerald-400 text-xl"></i>
+                    <span>Jusqu'à 75% d'aides de l'État incluses</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="max-w-6xl mx-auto px-4 py-20 w-full">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 mb-4">Comment fonctionne notre comparateur ?</h2>
+            <p class="text-slate-500 text-sm md:text-base leading-relaxed">
+                Volte simplifie vos démarches de A à Z pour équiper votre maison ou votre copropriété en toute sérénité.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="bg-white p-8 rounded-3xl border border-slate-100 card-shadow text-center md:text-left">
+                <div class="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center text-xl font-black mb-6">1</div>
+                <h3 class="font-extrabold text-xl mb-3 tracking-tight">Le Simulateur</h3>
+                <p class="text-slate-500 text-sm leading-relaxed"> Vous renseignez vos besoins (modèle du véhicule, configuration de votre logement) et notre outil calcule automatiquement vos subventions admissibles pour 2026.</p>
+            </div>
+            <div class="bg-white p-8 rounded-3xl border border-slate-100 card-shadow text-center md:text-left">
+                <div class="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center text-xl font-black mb-6">2</div>
+                <h3 class="font-extrabold text-xl mb-3 tracking-tight">La Sélection IRVE</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Notre algorithme identifie les 3 électriciens certifiés RGE / IRVE les plus compétitifs et les mieux notés situés à proximité directe de chez vous.</p>
+            </div>
+            <div class="bg-white p-8 rounded-3xl border border-slate-100 card-shadow text-center md:text-left">
+                <div class="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center text-xl font-black mb-6">3</div>
+                <h3 class="font-extrabold text-xl mb-3 tracking-tight">Les Devis Fermes</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Vous recevez 3 propositions commerciales transparentes. Vous comparez à tête reposée, sans aucune pression, et économisez en moyenne 400 € sur la pose.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-slate-100/50 border-y border-slate-200/60 py-16 px-4 w-full">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
+                <div>
+                    <span class="text-emerald-600 font-bold text-xs uppercase tracking-widest block mb-1">Espace Information</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900">Nos derniers guides d'experts</h2>
+                </div>
+                <a href="guides_volte.html" class="text-sm font-bold text-slate-900 hover:text-emerald-500 transition-colors flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl border border-slate-200 card-shadow">
+                    Voir tous les articles <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-3xl border border-slate-100 card-shadow flex flex-col justify-between hover-lift cursor-pointer" onclick="window.location.href='article_prix_borne.html'">
+                    <div>
+                        <span class="bg-emerald-50 text-emerald-700 text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md inline-block mb-4">À la une</span>
+                        <h3 class="font-extrabold text-lg text-slate-900 mb-2 leading-snug">Prix Installation Borne de Recharge en 2026 : Le Guide Complet</h3>
+                        <p class="text-slate-500 text-xs leading-relaxed line-clamp-2">Quel est le coût réel pour installer une Wallbox ? Découvrez le budget matériel, les frais d'artisan IRVE et comment cumuler jusqu'à 75% d'aides.</p>
+                    </div>
+                    <div class="pt-4 text-xs font-bold text-emerald-500 flex items-center justify-between">
+                        <span>Consulter l'article</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-3xl border border-slate-100 card-shadow flex flex-col justify-between hover-lift cursor-pointer" onclick="window.location.href='guides_volte.html'">
+                    <div>
+                        <span class="bg-blue-50 text-blue-700 text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md inline-block mb-4">Technique</span>
+                        <h3 class="font-extrabold text-lg text-slate-900 mb-2 leading-snug">Quelle puissance choisir pour sa borne : 7,4 kW ou 11 kW ?</h3>
+                        <p class="text-slate-500 text-xs leading-relaxed line-clamp-2">Monophasé ou triphasé ? Un comparatif complet pour ajuster la puissance de recharge à votre véhicule sans faire sauter votre compteur.</p>
+                    </div>
+                    <div class="pt-4 text-xs font-bold text-slate-400 flex items-center justify-between">
+                        <span>Découvrir le hub</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-white pt-16 pb-8 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="w-5 h-7 text-emerald-400" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="2" width="32" height="40" rx="6" fill="currentColor"/>
+                            <circle cx="20" cy="18" r="8" stroke="#10B981" stroke-width="2.5"/>
+                            <path d="M20 14L17 19H23L20 24" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="text-lg font-black tracking-tighter uppercase">Volte<span class="text-emerald-500">.</span></span>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">Volte vous accompagne de A à Z dans votre transition énergétique automobile. Guides d'achat indépendants, conseils techniques avancés et mise en relation qualifiée.</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4 uppercase text-xs text-slate-400 tracking-widest">Informations</h4>
+                    <ul class="text-sm text-slate-300 space-y-2">
+                        <li><a href="#" class="hover:text-white transition-colors">Mentions Légales</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Politique de Confidentialité</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Déclaration d'Affiliation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contactez la rédaction</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i class="fa-solid fa-award text-emerald-500 text-2xl"></i>
+                            <h4 class="font-bold">Indépendance</h4>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed uppercase font-bold tracking-widest mb-4">Label de Confiance</p>
+                        <p class="text-sm text-slate-300">Contenu rédigé et vérifié de manière totalement neutre par des experts certifiés IRVE / Automobile. Aucun test produit n'est sponsorisé.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 text-center text-sm text-slate-500">
+                <p>&copy; 2026 Volte Media Group. Tous droits réservés. L'énergie est notre avenir, économisons-la !</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

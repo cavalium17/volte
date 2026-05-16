@@ -1,0 +1,12 @@
+# 🤖 Configuration Robots.txt pour Volte (Optimisé 2026)
+
+# Autoriser tous les moteurs de recherche (Google, Bing, DuckDuckGo...)
+User-agent: *
+Allow: /
+
+# Bloquer l'exploration des fichiers de configuration ou de dev internes (au cas où)
+Disallow: /_vercel/
+Disallow: /README.md
+
+# 🗺️ Indiquer l'emplacement exact du Sitemap pour accélérer l'indexation
+Sitemap: https://www.volte.fr/sitemap.xml
