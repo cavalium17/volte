@@ -21,6 +21,64 @@
     <p>Ce site peut utiliser des cookies de base pour améliorer votre navigation ou analyser l'audience de manière totalement anonyme (via des outils respectueux du RGPD).</p>
 
     <h2>3. Vos Droits</h2>
-    <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression des données vous concernant. Pour toute demande, contactez-nous à : [Ton Adresse Email].</p>
+    <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression des données vous concernant. Pour toute demande, contactez-nous à : contact@volte.vercel.com.</p>
+    <button id="backToTop" title="Retour en haut">↑</button>
+
+<style>
+#backToTop {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Reste visible au défilement */
+    bottom: 20px; /* À 20px du bas */
+    right: 20px; /* À 20px de la droite */
+    z-index: 99; /* Reste au-dessus des autres éléments */
+    border: none;
+    outline: none;
+    background-color: #111; /* Couleur noire élégante */
+    color: white;
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 4px; /* Légèrement arrondi */
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s, opacity 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+#backToTop:hover {
+    background-color: #333; /* Devient un peu plus clair au survol */
+}
+
+/* Effet de défilement fluide pour tout le site */
+html {
+    scroll-behavior: smooth;
+}
+</style>
+
+<script>
+// Récupérer le bouton
+const btnBackToTop = document.getElementById("backToTop");
+
+// Écouter le défilement de la page
+window.onscroll = function() {
+    scrollFunction();
+};
+
+function scrollFunction() {
+    // Si on a descendu de plus de 300px, on affiche le bouton, sinon on le cache
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btnBackToTop.style.display = "block";
+    } else {
+        btnBackToTop.style.display = "none";
+    }
+}
+
+// Quand on clique sur le bouton, on remonte tout en haut
+btnBackToTop.addEventListener("click", function() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth" /* Remontée fluide animée */
+    });
+});
+</script>
 </body>
 </html>

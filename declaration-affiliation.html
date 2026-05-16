@@ -15,5 +15,63 @@
     <p><strong>Qu'est-ce que cela signifie ?</strong><br>
     Lorsque vous cliquez sur certains liens présents dans nos articles et que vous effectuez un achat, nous pouvons toucher une petite commission, sans aucun coût supplémentaire pour vous. Cela nous permet de financer les coûts d'hébergement et de continuer à vous proposer du contenu de qualité gratuitement.</p>
     <p>Nous tenons à préciser que nous ne recommandons que des produits ou services que nous jugeons sincèrement utiles et de qualité.</p>
+    <button id="backToTop" title="Retour en haut">↑</button>
+
+<style>
+#backToTop {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Reste visible au défilement */
+    bottom: 20px; /* À 20px du bas */
+    right: 20px; /* À 20px de la droite */
+    z-index: 99; /* Reste au-dessus des autres éléments */
+    border: none;
+    outline: none;
+    background-color: #111; /* Couleur noire élégante */
+    color: white;
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 4px; /* Légèrement arrondi */
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s, opacity 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+#backToTop:hover {
+    background-color: #333; /* Devient un peu plus clair au survol */
+}
+
+/* Effet de défilement fluide pour tout le site */
+html {
+    scroll-behavior: smooth;
+}
+</style>
+
+<script>
+// Récupérer le bouton
+const btnBackToTop = document.getElementById("backToTop");
+
+// Écouter le défilement de la page
+window.onscroll = function() {
+    scrollFunction();
+};
+
+function scrollFunction() {
+    // Si on a descendu de plus de 300px, on affiche le bouton, sinon on le cache
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btnBackToTop.style.display = "block";
+    } else {
+        btnBackToTop.style.display = "none";
+    }
+}
+
+// Quand on clique sur le bouton, on remonte tout en haut
+btnBackToTop.addEventListener("click", function() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth" /* Remontée fluide animée */
+    });
+});
+</script>
 </body>
 </html>
