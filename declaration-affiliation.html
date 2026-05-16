@@ -15,61 +15,95 @@
     <p><strong>Qu'est-ce que cela signifie ?</strong><br>
     Lorsque vous cliquez sur certains liens présents dans nos articles et que vous effectuez un achat, nous pouvons toucher une petite commission, sans aucun coût supplémentaire pour vous. Cela nous permet de financer les coûts d'hébergement et de continuer à vous proposer du contenu de qualité gratuitement.</p>
     <p>Nous tenons à préciser que nous ne recommandons que des produits ou services que nous jugeons sincèrement utiles et de qualité.</p>
-    <button id="backToTop" title="Retour en haut">↑</button>
+    <button id="backToTop" title="Retour en haut" aria-label="Retour en haut de la page">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+        <path d="M12 4l-8 8h6v8h4v-8h6z" fill="currentColor"/>
+    </svg>
+</button>
 
 <style>
 #backToTop {
-    display: none; /* Caché par défaut */
-    position: fixed; /* Reste visible au défilement */
-    bottom: 20px; /* À 20px du bas */
-    right: 20px; /* À 20px de la droite */
-    z-index: 99; /* Reste au-dessus des autres éléments */
-    border: none;
-    outline: none;
-    background-color: #111; /* Couleur noire élégante */
-    color: white;
+    /* Positionnement fixe pour qu'il suive le défilement */
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999; /* Passe au-dessus de tout le contenu */
+    
+    /* Dimensions et forme circulaire */
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    
+    /* Centrage parfait de l'icône */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* --- COULEUR DE FOND (VERT SEMI-TRANSPARENT) --- */
+    /* Note : Tu peux remplacer #04a75b par le code couleur exact de ton site */
+    background-color: rgba(4, 167, 91, 0.85); 
+    color: #ffffff; /* Flèche blanche */
+    border: 1px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
-    padding: 12px 16px;
-    border-radius: 4px; /* Légèrement arrondi */
-    font-size: 18px;
-    font-weight: bold;
-    transition: background-color 0.3s, opacity 0.3s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    
+    /* Ombres et effet flou d'arrière-plan (Glassmorphism) */
+    box-shadow: 0 4px 12px rgba(4, 167, 91, 0.3); /* Ombre légèrement teintée en vert */
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    
+    /* ÉTAT INITIAL : Invisible et décalé vers le bas */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    
+    /* Gestion des transitions */
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
 }
 
+/* ÉTAT ACTIF : Activé au scroll par le JavaScript */
+#backToTop.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Interaction au survol (Hover) */
 #backToTop:hover {
-    background-color: #333; /* Devient un peu plus clair au survol */
+    background-color: rgba(3, 143, 77, 1); /* Vert un peu plus soutenu et 100% opaque */
+    transform: translateY(-4px); /* Effet d'élévation */
+    box-shadow: 0 6px 16px rgba(4, 167, 91, 0.5);
 }
 
-/* Effet de défilement fluide pour tout le site */
+/* Interaction au clic (Active) */
+#backToTop:active {
+    transform: translateY(-1px);
+}
+
+/* Assure un défilement fluide natif sur tout le site */
 html {
     scroll-behavior: smooth;
 }
 </style>
 
 <script>
-// Récupérer le bouton
 const btnBackToTop = document.getElementById("backToTop");
 
-// Écouter le défilement de la page
 window.onscroll = function() {
-    scrollFunction();
+    controlBackToTopButton();
 };
 
-function scrollFunction() {
-    // Si on a descendu de plus de 300px, on affiche le bouton, sinon on le cache
+function controlBackToTopButton() {
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-        btnBackToTop.style.display = "block";
+        btnBackToTop.classList.add("visible");
     } else {
-        btnBackToTop.style.display = "none";
+        btnBackToTop.classList.remove("visible");
     }
 }
 
-// Quand on clique sur le bouton, on remonte tout en haut
 btnBackToTop.addEventListener("click", function() {
     window.scrollTo({
         top: 0,
-        behavior: "smooth" /* Remontée fluide animée */
+        behavior: "smooth"
     });
 });
 </script>
